@@ -18,21 +18,15 @@
 
 #include <omnetpp.h>
 
-using namespace omnetpp;
-
 namespace tictoc {
-
 /**
  * Implements the Txc simple module. See the NED file for more information.
  */
-class Txc : public cSimpleModule
+class Txc : public omnetpp::cSimpleModule
 {
   protected:
     virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-    static simsignal_t arrivalSignal;
-};
-
-}; // namespace
-
+    virtual void handleMessage(omnetpp::cMessage *msg);
+    static omnetpp::simsignal_t arrivalSignal;
+};}
 #endif
