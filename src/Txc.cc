@@ -26,6 +26,8 @@ Register_ResultRecorder("tictoc_live", wampinterfaceforomnetpp::LiveRecorder<top
 
 void Txc::initialize()
 {
+    sleepTime = par("sleepTime");
+
     if (par("sendInitialMessage").boolValue())
     {
         omnetpp::cMessage *msg = new omnetpp::cMessage("tictocMsg");
@@ -35,11 +37,25 @@ void Txc::initialize()
 
 void Txc::handleMessage(omnetpp::cMessage *msg)
 {
-    // just send back the message we received
-    send(msg, "out");
+    if(msg->isSelfMessage()) {
+        // the message was already delayed, send back
+        send(msg, "out");
+    }
+    else {
+        // the message just arrived
 
-    if (par("sendInitialMessage").boolValue())
-    {
-        emit(arrivalSignal, 1);
+        if (par("sendInitialMessage").boolValue())
+        {
+            emit(arrivalSignal, 1);
+        }
+
+
+        scheduleAt(omnetpp::simTime()+sleepTime,msg);
     }
 }
+
+void Txc::handleParameterChange(const char *parname)
+{
+    sleepTime = par("sleepTime");
+}
+

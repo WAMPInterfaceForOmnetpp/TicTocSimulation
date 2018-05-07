@@ -17,12 +17,14 @@ package tictoc.simulations;
 
 import tictoc.Txc;
 
+import wampinterfaceforomnetpp.SimulationCallee;
 //
 // Two instances (tic and toc) of Txc connected.
 //
 network Tictoc
 {
     submodules:
+        callee: SimulationCallee;
         tic: Txc;
         toc: Txc;
     connections:

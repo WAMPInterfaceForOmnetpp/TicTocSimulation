@@ -23,6 +23,7 @@ simple Txc
 {
     parameters:
         bool sendInitialMessage = default(false);
+	    double sleepTime = default(1.0);
         @signal[arrival](type=long);
         @statistic[arrivalSignal](title="the arrivals"; source=arrival; record=tictoc_live(sum); interpolationmode=none);
     gates:

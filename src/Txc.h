@@ -28,5 +28,9 @@ class Txc : public omnetpp::cSimpleModule
     virtual void initialize();
     virtual void handleMessage(omnetpp::cMessage *msg);
     static omnetpp::simsignal_t arrivalSignal;
+    omnetpp::simtime_t sleepTime;
+
+  public:
+    void handleParameterChange(const char *parname);
 };}
 #endif
