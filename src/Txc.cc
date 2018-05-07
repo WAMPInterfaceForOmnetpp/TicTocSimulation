@@ -14,10 +14,15 @@
 // 
 
 #include "Txc.h"
+#include "LiveRecorder.h"
 
 namespace tictoc {
 
+simsignal_t Txc::arrivalSignal = registerSignal("arrival");
 Define_Module(Txc);
+
+char topic[] = "com.examples.subscriptions.topic1";
+Register_ResultRecorder("tictoc_live", wampinterfaceforomnetpp::LiveRecorder<topic>());
 
 void Txc::initialize()
 {
@@ -32,6 +37,7 @@ void Txc::handleMessage(cMessage *msg)
 {
     // just send back the message we received
     send(msg, "out");
+    emit(arrivalSignal, 1);
 }
 
 }; // namespace

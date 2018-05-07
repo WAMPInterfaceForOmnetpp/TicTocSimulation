@@ -23,6 +23,8 @@ simple Txc
 {
     parameters:
         bool sendInitialMessage = default(false);
+        @signal[arrival](type=long);
+        @statistic[arrivalSignal](title="the arrivals"; source=arrival; record=count,tictoc_live; interpolationmode=none);
     gates:
         input in;
         output out;
