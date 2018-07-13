@@ -24,10 +24,16 @@ import wampinterfaceforomnetpp.SimulationCallee;
 network Tictoc
 {
     submodules:
-        callee: SimulationCallee;
-        tic: Txc;
-        toc: Txc;
+        callee: SimulationCallee {
+            @display("p=78,95");
+        }
+        tic: Txc {
+            @display("p=29,27;i=device/accesspoint");
+        }
+        toc: Txc {
+            @display("p=133,27;i=device/accesspoint");
+        }
     connections:
-        tic.out --> {delay = 100ms;} --> toc.in;
-        tic.in <-- {delay = 100ms;} <-- toc.out;
+        tic.out --> {  delay = 100ms; } --> toc.in;
+        tic.in <-- {  delay = 100ms; } <-- toc.out;
 }
